@@ -7,7 +7,6 @@
 import debugPkg from 'debug';
 import http from 'http';
 import app from '../lib/app';
-import db from '../lib/models';
 
 const debug = debugPkg('js/www:server');
 
@@ -28,11 +27,8 @@ const server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-// Run sequelize before listen
-db.sequelize.authenticate().then(() => {
-  app.listen(port, () => {
-    console.log(`¡Aplicación iniciada! ====> 🌎 http://localhost:${port}`);
-  });
+app.listen(port, () => {
+  console.log(`¡Aplicación iniciada! ====> 🌎 http://localhost:${port}`);
 });
 
 server.on('error', onError);
